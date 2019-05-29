@@ -1,6 +1,6 @@
 ﻿﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ output extension=".cs" #>
-<#@ include file="..\..\NBT.Standard\NbtGeneratorData.t4" #>using System.IO;
+<#@ include file="../../NBT.Standard/NbtGeneratorData.t4" #>using System.IO;
 using Xunit;
 using NBT.Serialization;
 

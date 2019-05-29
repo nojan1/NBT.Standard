@@ -1,4 +1,4 @@
-﻿﻿<#@ include file="..\..\NBT.Standard\NbtGeneratorData.t4" #>using System;
+﻿﻿<#@ include file="../../NBT.Standard/NbtGeneratorData.t4" #>using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

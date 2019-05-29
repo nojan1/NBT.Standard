@@ -1,7 +1,8 @@
 ﻿﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ output extension=".cs" #>
-<#@ include file="NbtGeneratorData.t4" #>namespace NBT
+<#@ include file="NbtGeneratorData.t4" #>
+namespace NBT
 {
   /// <summary>
   /// Values that represent tag types.

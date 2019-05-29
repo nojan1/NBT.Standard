@@ -145,5 +145,8 @@
     <Compile Update="TagLongArray.generated.cs">
       <DependentUpon>TagLongArray.generated.tt</DependentUpon>
     </Compile>
+    <Compile Update="Serialization\TagReader.generated.cs">
+      <DependentUpon>TagReader.generated.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

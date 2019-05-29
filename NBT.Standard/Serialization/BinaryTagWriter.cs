@@ -46,6 +46,11 @@ namespace NBT.Serialization
         {
             WriteValue(value);
         }
+        
+        public override void WriteArrayValue(long value)
+        {
+            WriteValue(value);
+        }
 
         public override void WriteEndDocument()
         {
@@ -68,7 +73,11 @@ namespace NBT.Serialization
             {
                 type = TagType.IntArray;
             }
-            else if (type != TagType.ByteArray && type != TagType.IntArray)
+            else if (type == TagType.Long)
+            {
+                type = TagType.LongArray;
+            }
+            else if (type != TagType.ByteArray && type != TagType.IntArray && type != TagType.LongArray)
             {
                 throw new ArgumentException("Only byte or integer types are supported.", nameof(type));
             }
@@ -165,6 +174,23 @@ namespace NBT.Serialization
             }
         }
 
+        protected override void WriteValue(long[] value)
+        {
+            if (value != null && value.Length != 0)
+            {
+                WriteValue(value.Length);
+                foreach (var item in value)
+                {
+                    WriteValue(item);
+                }
+            }
+            else
+            {
+                WriteValue(0);
+            }
+        }
+
+        
         protected override void WriteValue(int value)
         {
             var buffer = BitConverter.GetBytes(value);

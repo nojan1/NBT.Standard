@@ -230,11 +230,38 @@ namespace NBT.Serialization
             return values;
         }
 
+        public override long[] ReadLongArray()
+        {
+            var isLittleEndian = TagWriter.IsLittleEndian;
+            var length = ReadInt();
+            var bufferLength = length * BitHelper.LongSize;
+            var buffer = new byte[bufferLength];
+
+            if (bufferLength != _stream.Read(buffer, 0, bufferLength))
+            {
+                throw new InvalidDataException();
+            }
+
+            var values = new long[length];
+
+            for (var i = 0; i < length; i++)
+            {
+                if (isLittleEndian)
+                {
+                    BitHelper.SwapBytes(buffer, i * 8, 8);
+                }
+
+                values[i] = BitConverter.ToInt64(buffer, i * 8);
+            }
+
+            return values;
+        }
+
         public override TagCollection ReadList()
         {
             var listType = (TagType) ReadByte();
 
-            if (listType < TagType.End || listType > TagType.IntArray)
+            if (listType < TagType.End || listType > TagType.LongArray)
             {
                 throw new InvalidDataException($"Unexpected list type '{listType}' found.");
             }
@@ -278,6 +305,10 @@ namespace NBT.Serialization
                         tag = TagFactory.CreateTag(ReadIntArray());
                         break;
 
+                    case TagType.LongArray:
+                        tag = TagFactory.CreateTag(ReadLongArray());
+                        break;
+                    
                     case TagType.List:
                         tag = TagFactory.CreateTag(ReadList());
                         break;
@@ -365,7 +396,7 @@ namespace NBT.Serialization
 
             var type = ReadTagType();
 
-            if (type > TagType.IntArray)
+            if (type > TagType.LongArray)
             {
                 throw new InvalidDataException($"Unrecognized tag type: {type}.");
             }
@@ -403,6 +434,10 @@ namespace NBT.Serialization
 
                 case TagType.IntArray:
                     result = TagFactory.CreateTag(name, ReadIntArray());
+                    break;
+                
+                case TagType.LongArray:
+                    result = TagFactory.CreateTag(name, ReadLongArray());
                     break;
 
                 case TagType.Long:

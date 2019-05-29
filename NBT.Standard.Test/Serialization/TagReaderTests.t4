@@ -1,4 +1,4 @@
-﻿﻿<#@ include file="..\..\NBT.Standard\NbtGeneratorData.t4" #>using System.IO;
+﻿﻿<#@ include file="../../NBT.Standard/NbtGeneratorData.t4" #>using System.IO;
 using Xunit;
 using NBT.Serialization;
 

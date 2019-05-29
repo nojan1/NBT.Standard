@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>    
-    <TargetFramework>netcoreapp1.1</TargetFramework>    
+    <TargetFramework>netcoreapp2.1</TargetFramework>    
     <RootNamespace>NBT.Test</RootNamespace>
   </PropertyGroup>
 
@@ -292,6 +292,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>TagStringTests.generated.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TagLongArrayTests.generated.cs">
+      <DependentUpon>TagLongArrayTests.generated.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

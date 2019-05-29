@@ -148,6 +148,32 @@ namespace NBT.Serialization
             return result;
         }
 
+        public override long[] ReadLongArray()
+        {
+            long[] result;
+
+            var value = ReadString();
+
+            if (!string.IsNullOrEmpty(value))
+            {
+                string[] values;
+
+                values = value.Split(ArraySeparaters, StringSplitOptions.RemoveEmptyEntries);
+                result = new long[values.Length];
+
+                for (var i = 0; i < values.Length; i++)
+                {
+                    result[i] = Convert.ToInt64(values[i]);
+                }
+            }
+            else
+            {
+                result = TagLongArray.EmptyValue;
+            }
+
+            return result;
+        }
+
         public override TagCollection ReadList()
         {
             var listTypeName = _reader.GetAttribute("limitType");
@@ -317,6 +343,10 @@ namespace NBT.Serialization
 
                 case TagType.IntArray:
                     result = TagFactory.CreateTag(name, ReadIntArray());
+                    break;
+
+                case TagType.LongArray:
+                    result = TagFactory.CreateTag(name, ReadLongArray());
                     break;
 
                 // Can't be hit as ReadTagType will throw
