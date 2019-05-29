@@ -1,0 +1,13 @@
+﻿﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="../NBT.Standard/NbtGeneratorData.t4" #>
+<#
+    string nbtName = "LongArray";
+    string typeName = "long[]";
+    object testValue = tagTestData[tagTypeLongArray];
+    object altTestValue = altTagTestData[tagTypeLongArray];
+    object defaultValue = "new long[0]";
+    string valueString = "2190654654545, 295464654694, 324546546546548, 42943564654654394";
+    int listCount = 4;
+    #>
+<#@ output extension=".cs" #>
+<#@ include file="TagTests.t4" #>
